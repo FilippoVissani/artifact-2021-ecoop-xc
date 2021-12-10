@@ -1,6 +1,8 @@
 # XC: Scala DSL implementation
 
-## XC/Scala: an XC implementation as an internal Scala domain-specific language (DSL)
+XC/Scala is a Scala-internal domain-specific language (DSL) implementation of the XC research language for distributed adaptive computing.
+
+## Overview
 
 - **Where?** The source code of the implementation can be found under `src/main/scala`, package `xc`
 - **What?** The DSL implementation includes the components described in the paper, namely:
@@ -13,3 +15,7 @@
     - Run `./gradlew run` (Linux) or `gradlew.bat run` (Windows) to execute an XC system of interacting devices computing a program
         - Prerequisites: Java 11 (e.g., using Jabba: `jabba use adopt@1.11.28-0`)
     - Take a look at `xc.examples.GradientMain` to get a sense of the execution model
+
+## License
+
+See the `LICENSE` file.
