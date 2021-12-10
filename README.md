@@ -10,7 +10,9 @@ XC/Scala is a Scala-internal domain-specific language (DSL) implementation of th
     - `xc.XCLang` and `xc.XCLangImpl`: interface with the XC constructs and corresponding implementation class
     - `xc.XCLib`: provides reusable functions (building blocks) upon `XCLang`; examples include `collect`, `broadcast`, `distanceTo` (see examples in the paper)
     - `xc.XCProgram`: class to be specialised and implemented (`main` method) in order to define an XC program
-    - `xc.examples.Gradient`: shows a concrete XC program computing a "gradient" (each node of the system eventually computes the minimum distance from the closest "source" node)
+    - `xc.examples.Gradient`: shows a concrete XC program computing a "gradient" (each node of the system eventually computes the minimum distance from the closest "source" node).
+    This is especially illustrative since it shows a simple implementation of a "complete system" where communication is simulated by writing on shared state.
+    However, please notice that the synchronous execution is a simplification: the devices of an XC system may run concurrently and communications can be completely asynchronous.
 - **How??**
     - Run `./gradlew run` (Linux) or `gradlew.bat run` (Windows) to execute an XC system of interacting devices computing a program
         - Prerequisites: Java 11 (e.g., using Jabba: `jabba use adopt@1.11.28-0`)
