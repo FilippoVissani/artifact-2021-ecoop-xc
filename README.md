@@ -10,5 +10,6 @@
     - `xc.XCProgram`: class to be specialised and implemented (`main` method) in order to define an XC program
     - `xc.examples.Gradient`: shows a concrete XC program computing a "gradient" (each node of the system eventually computes the minimum distance from the closest "source" node)
 - **How??**
-    - Run `./gradlew run` to execute an XC system of interacting devices computing a program
+    - Run `./gradlew run` (Linux) or `gradlew.bat run` (Windows) to execute an XC system of interacting devices computing a program
+        - Prerequisites: Java 11 (e.g., using Jabba: `jabba use adopt@1.11.28-0`)
     - Take a look at `xc.examples.GradientMain` to get a sense of the execution model
