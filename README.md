@@ -1,6 +1,13 @@
 # XC: Scala DSL implementation
 
 XC/Scala is a Scala-internal domain-specific language (DSL) implementation of the XC research language for distributed adaptive computing.
+This language was presented in the paper "Functional programming for distributed systems with XC" accepted at ECOOP'22.
+The XC/Scala DSL implementation builds on the [ScaFi aggregate programming language](https://scafi.github.io).
+
+Related repositories:
+
+- [ScaFi repository](https://github.com/scafi/scafi)
+- [XC/Scala-based SmartC case study](https://github.com/scafi/artifact-2021-ecoop-smartc)
 
 ## Overview
 
@@ -21,3 +28,8 @@ XC/Scala is a Scala-internal domain-specific language (DSL) implementation of th
 ## License
 
 See the `LICENSE` file.
+
+## Contacts
+    
+[Roberto Casadei](https://robertocasadei.github.io/)
+
