@@ -2,6 +2,7 @@ package xc.examples
 
 import xc.XCIncarnation._
 import xc.{XCLangImpl, XCLib}
+import com.typesafe.scalalogging.Logger
 
 class Gradient extends AggregateProgram with StandardSensors with XCLangImpl with XCLib {
   override def main(): Any = {
@@ -12,6 +13,7 @@ class Gradient extends AggregateProgram with StandardSensors with XCLangImpl wit
 object GradientMain extends App {
   print("############ Hello XC ############\n")
 
+  val logger: Logger = Logger("logback")
   val program = new Gradient()
 
   // Now let's build a simplified system with sequential execution just to illustrate the execution model
@@ -28,13 +30,24 @@ object GradientMain extends App {
   // The following cycle performs the scheduling of rounds and simulates communication by writing on `state`
   for(d <- scheduling){
     val ctx = factory.context(selfId = d, exports = state(d).exports, lsens = state(d).localSensors, nbsens = state(d).nbrSensors)
-    println(s"RUN: DEVICE ${d}\n\tCONTEXT: ${state(d)}")
+    logger.info(s"RUN: DEVICE $d")
+    logger.info(s"\tCONTEX:")
+    logger.info(s"\t\tEXPORTS:")
+    state(d).exports.foreach(e => {
+      logger.info(s"\t\t\tID ${e._1}:")
+      e._2.paths.foreach(p => logger.info(s"\t\t\t\t$p"))
+    })
+    logger.info(s"\t\tNBR SENSORS: ${state(d).nbrSensors}")
+    logger.info(s"\t\tLOCAL SENSORS: ${state(d).localSensors}")
     val export = program.round(ctx)
     state += d -> state(d).copy(exports = state(d).exports + (d -> export)) // update d's state
     // Simulate sending of messages to neighbours
     state(d).nbrSensors(nbrRange).keySet.foreach(nbr => {
       state += nbr -> state(nbr).copy(exports = state(nbr).exports + (d -> export))
     })
-    println(s"\tEXPORT: ${export}\n\tOUTPUT: ${export.root()}\n--------------")
+    logger.info(s"\tEXPORT:")
+    export.paths.foreach(p => logger.info(s"\t\t$p"))
+    logger.info(s"\tOUTPUT: ${export.root()}")
+    logger.info("---------------------")
   }
 }
